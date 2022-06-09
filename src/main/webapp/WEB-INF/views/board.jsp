@@ -26,6 +26,10 @@ tr:nth-child(even) {
 </style>
 </head>
 <body>
+	<button type="button" onclick ="doLogout()">로그아웃</button>
+
+	<h1>${userId}님 환영합니다</h1>
+	<input type ="hidden" value="${userNo}" />
 	<!-- 문제. 테이블에 데이터 넣기  -->
 	<table>
 		<thead>
@@ -36,15 +40,29 @@ tr:nth-child(even) {
 	 		</tr>
 		</thead>
 	 	<tbody>
-	 		<c:forEach items="${data.list}" var="i">
-		 		<tr>
-				    <td>${i.Company}</td>
-				    <td>${i.Contact}</td>
-				    <td>${i.Country}</td>
-  				</tr>
-			</c:forEach>
+	 		<!-- fn:fuction을줄인 jsp함수 -->
+	 		<c:choose>	 		
+	 			<c:when test="${fn:length(data.list) > 0}">
+	 				<c:forEach items="${data.list}" var="i">
+		 				<tr>
+				    		<td>${i.Company}</td>
+				    		<td>${i.Contact}</td>
+				    		<td>${i.Country}</td>
+  						</tr>
+					</c:forEach>
+	 			</c:when>
+	 			<c:otherwise>
+	 				<tr>
+	 					<td colspan="3">데이터가 없습니다.</td>
+	 				</tr>
+	 			</c:otherwise>
+	 		</c:choose>
 	 	</tbody>
 	</table>
-	
+	<script type="text/javascript">
+		function doLogout(){
+			location.href= "/logout"
+		}
+	</script>
 </body>
 </html>

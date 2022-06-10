@@ -107,7 +107,9 @@ public class HomeController {
 	}
 	
 	@PostMapping("/login")
-	public @ResponseBody boolean callLogin(@RequestBody Map<String , Object> data, HttpSession httpSession) {
+	public @ResponseBody boolean callLogin(
+			@RequestBody Map<String , Object> data,
+			HttpSession httpSession) {
 		String userId = (String) data.get("userId");
 		String userPassword = (String) data.get("userPassword");
 		
